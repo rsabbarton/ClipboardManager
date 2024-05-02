@@ -1,0 +1,22 @@
+{
+  "name": "clipboardmanager",
+  "version": "0.1.0",
+  "description": "Multi-platform clipboard manager",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "keywords": [
+    "clipboard",
+    "manager"
+  ],
+  "author": "Richard Sabbarton",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^30.0.2"
+  },
+  "dependencies": {
+    "xel": "^0.25.11"
+  }
+}
