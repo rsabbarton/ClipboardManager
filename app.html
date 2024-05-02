@@ -3,8 +3,14 @@
   <head>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self';">
+    <title>Clipboard Manager</title>
+
+    <script src="node_modules/xel/xel.js" type="module"></script>
+    <meta name="xel-theme" content="node_modules/xel/themes/adwaita.css">
+    <meta name="xel-accent-color" content="blue">
+    <meta name="xel-iconsets" content="node_modules/xel/iconsets/material.svg">
+
   </head>
   <body>
     <h1>Hello World!</h1>
@@ -12,5 +18,5 @@
     Chromium <span id="chrome-version"></span>,
     and Electron <span id="electron-version"></span>.
   </body>
-  <script src="./renderer.js" type="module"></script>
+  <script src="./renderer.js"></script>
 </html>

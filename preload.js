@@ -3,7 +3,7 @@ const { contextBridge, ipcRenderer } = require('electron/renderer')
 contextBridge.exposeInMainWorld('electronAPI', {
   addClip: (callback) => ipcRenderer.on('add-clip', (_event, clip) => {
         callback(clip)
-        console.log(clip)
+        //console.log(clip)
     })
 })
 

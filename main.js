@@ -14,7 +14,7 @@ let pollingInterval = 1000
 // modify your existing createWindow() function
 const createWindow = () => {
   window = new BrowserWindow({
-    width: 800,
+    width: 1000,
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
@@ -22,6 +22,7 @@ const createWindow = () => {
   })
 
   window.loadFile('app.html')
+  window.webContents.openDevTools()
 }
 
 
@@ -54,7 +55,14 @@ function polling(){
         //console.log(newClip)
 
         console.log(Date.now())
-        window.webContents.send('add-clip', newClip)
+        let newClipEvent = {
+            id: Date.now(),
+            clip: newClip,
+            typeInfo: {
+                type: "text etc."
+            }
+        }
+        window.webContents.send('add-clip', newClipEvent)
 
         oldClip = newClip
     }
