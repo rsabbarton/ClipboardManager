@@ -1,4 +1,29 @@
 
+
+
+#box-search {
+    padding: 10px;
+}
+
+#box-clipboard  {
+    padding: 10px;
+}
+
+#box-settings {
+    padding: 10px;
+}
+
+#box-plugins {
+    padding: 10px;
+}
+
 #box-about {
     padding: 10px;
+}
+
+.x-accordion-label {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-wrap: nowrap;
+    width: -webkit-fill-available;
 }

@@ -27,15 +27,22 @@ module.exports = class Clip {
 
     equals(clip){
 
-        if(typeof(this.image) == 'object' && typeof(clip.image) == 'object')
+        if(typeof(this.image) == 'object' && 
+           typeof(clip.image) == 'object' &&
+           typeof(this.image.toDataURL) == 'function' &&
+           typeof(clip.image.toDataURL) == 'function'){
             if(clip.image.toDataURL() != this.image.toDataURL()) return false
+        }
+            
             
 
         if(clip.text != this.text) return false
         if(clip.html != this.html) return false
         if(clip.rtf != this.rtf) return false
         if(clip.bookmark.url != this.bookmark.url) return false
-        if(!clip.buffer.equals(this.buffer)) return false
+
+        if(typeof(clip.buffer.equals) == 'function')
+            if(!clip.buffer.equals(this.buffer)) return false
 
         return true
     }

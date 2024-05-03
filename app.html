@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' filesystem; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' filesystem; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src * filesystem data:;">
     <title>Clipboard Manager</title>
 
     <script src="node_modules/xel/xel.js" type="module"></script>
@@ -35,20 +35,34 @@
       </x-tab>
       
     </x-tabs>
+
+    <x-box id="box-search" style="display: block;">
+      <x-input id="input-search">
+        <x-icon href="#search"></x-icon>
+        <x-label>Search</x-label>
+      </x-input>
+    </x-box>
     <x-box id="box-clipboard" vertical style="display: block;">
-      Clipboard Content
     </x-box>
     <x-box id="box-settings" vertical style="display: none;">
-      Settings
+      <h3>Settings</h3>
+      <x-button id="button-clear-history">
+        <x-icon href="#clock"></x-icon>
+        <x-label>Clear Clipboard History</x-label>
+      </x-button>
     </x-box>
     <x-box id="box-plugins" vertical style="display: none;">
       Plugins and information
     </x-box>
     <x-box id="box-about" vertical style="display: none;">
-      <h1>Hello World!</h1>
-        We are using Node.js <span id="node-version"></span>,
-        Chromium <span id="chrome-version"></span>,
-        and Electron <span id="electron-version"></span>.
+      <h3>Clipboard Manager - v0.1.0</h3>
+        Node.js: <span id="node-version"></span><br>
+        Chromium: <span id="chrome-version"></span><br>
+        Electron: <span id="electron-version"></span><br>
+        Xel-Toolkit: <span id="xel-version">^0.25.11</span><br>
+        <br>
+        By: Richard Sabbarton<br>
+        E-Mail: richard.sabbarton@gmail.com<br>
     </x-box>
   </body>
   <script src="./renderer.js"></script>

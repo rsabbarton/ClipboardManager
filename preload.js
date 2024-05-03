@@ -4,7 +4,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
   addClip: (callback) => ipcRenderer.on('add-clip', (_event, clip) => {
         callback(clip)
         //console.log(clip)
-    })
+    }),
+    clearHistory: () => ipcRenderer.send('history:clear'),
+    copyEntry: (id) => ipcRenderer.send('history:copy', id)  
 })
 
 

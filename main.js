@@ -1,13 +1,21 @@
 const { app, BrowserWindow, clipboard, ipcMain, Menu, MenuItem, shell } = require('electron')
-// include the Node.js 'path' module at the top of your file
 const path = require('node:path')
 const fs = require('fs')
 const { exec } = require('child_process')
 
+const USERPROFILEFOLDER = require('os').homedir();
+const appProfilePath = path.join(USERPROFILEFOLDER, '.ClipboardManager')
+const historyFile = path.join(appProfilePath, "history.json")
+if(!fs.existsSync(appProfilePath)){
+  console.log("creating app profile folder: ", appProfilePath)
+  fs.mkdirSync(appProfilePath)
+  fs.writeFileSync(historyFile, JSON.stringify([]))
+}
 
 const Clip = require("./modules/clip.js")
 
 let oldClip = false
+let history = new Array()
 let window
 let pollingInterval = 1000
 let logfilePath = path.join(__dirname, "out.log")
@@ -17,6 +25,7 @@ const createWindow = () => {
   window = new BrowserWindow({
     width: 1000,
     height: 600,
+    show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -24,13 +33,21 @@ const createWindow = () => {
 
   window.loadFile('app.html')
   window.webContents.openDevTools()
+  window.once('ready-to-show', () => {
+    window.show()
+    loadHistory()
+    if(history.length > 0){
+      oldClip = history[history.length - 1]
+    }
+    polling()
+
+  })
 }
 
 
 app.whenReady().then(() => {
     createWindow()
-    polling()
-
+    
     app.on('activate', () => {
       if (BrowserWindow.getAllWindows().length === 0) createWindow()
       
@@ -46,8 +63,13 @@ app.on('window-all-closed', () => {
 })
   
   
+ipcMain.on("history:clear",(event)=>{
+  clearHistory()
+})
 
-
+ipcMain.on("history:copy",(id)=>{
+  copyEntry(id)
+})
 function polling(){
 
     let newClip = new Clip(clipboard)
@@ -58,11 +80,14 @@ function polling(){
         console.log(Date.now())
 
         newClip.process()
-        
+
         log(newClip.availableFormats)
         window.webContents.send('add-clip', newClip)
 
         oldClip = newClip
+
+        history.push(newClip)
+        saveHistory()
     }
 
 
@@ -79,4 +104,44 @@ function log(data){
     console.log(Date.now(), data)
     fs.writeFileSync(logfilePath, data)
   }
+}
+
+
+
+function saveHistory(){
+
+  fs.writeFileSync(historyFile, JSON.stringify(history))
+
+}
+
+
+function loadHistory(){
+
+  console.log("Loading History")
+  if(fs.existsSync(historyFile)){
+      history = JSON.parse(fs.readFileSync(historyFile))
+      if(typeof(history) == 'object'){
+        history.forEach((entry)=>{
+          console.log(entry)
+          window.webContents.send('add-clip', entry)
+
+        })
+      }
+  } else {
+    history = new Array()
+    saveHistory()
+  }
+
+}
+
+
+function clearHistory(){
+  history = new Array()
+  saveHistory()
+}
+
+
+function copyEntry(id){
+  // TODO: Add copy entry code
+  
 }
