@@ -2,11 +2,13 @@
 
 module.exports = class Clip {
     constructor(clipboardObject) {
+        // Clipboard Contents
         this.text = clipboardObject.readText()
         this.html = clipboardObject.readHTML()
         this.image = clipboardObject.readImage()
         this.rtf = clipboardObject.readRTF()
         this.bookmark = clipboardObject.readBookmark()
+
         // read the buffer
         if(clipboardObject.availableFormats().length > 0){
             this.buffer = clipboardObject.readBuffer(clipboardObject.availableFormats()[0])
@@ -14,6 +16,10 @@ module.exports = class Clip {
             this.buffer = Buffer.from("NULL", "utf-8")
         }
         
+
+        // clipboard content info
+        this.availableFormats = clipboardObject.availableFormats()
+        //this.readInfo = clipboardObject.read()
     }
 
     equals(clip){
