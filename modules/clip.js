@@ -47,19 +47,37 @@ module.exports = class Clip {
         this.hasImage = false
         this.hasBuffer = false
         this.hasBookmark = false
+        this.iconTag = 'text-align-left'
 
         
         console.log(this.availableFormats)
         if(typeof(this.availableFormats) == 'object'){
             this.availableFormats.forEach((format)=>{
                 let f = format.toLowerCase()
-                if(f == 'text/plain') this.hasText = true
-                if(f == 'text/html') this.hasHTML = true
-                if(this.bookmark.url.length > 0) this.hasBookmark = true
-                if(f.indexOf('image') > -1) this.hasImage = true
-                if(this.buffer.length > 0) this.hasBuffer = true
+                if(f == 'text/plain') {
+                    this.hasText = true
+                    this.iconTag = 'text-align-left'
+                }
+                if(f == 'text/html') {
+                    this.hasHTML = true
+                    this.iconTag = 'code'
+                }
+
+                if(this.bookmark.url.length > 0){
+                    this.hasBookmark = true
+                    this.iconTag = 'bookmark'
+                } 
+                if(f.indexOf('image') > -1){
+                    this.hasImage = true
+                    this.iconTag = 'image'
+                } 
+                if(this.buffer.length > 0){
+                    this.hasBuffer = true
+                    this.iconTag = 'folder'
+                } 
             })
         }
         
     }
+
 }

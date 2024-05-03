@@ -21,6 +21,7 @@ function setupElectronCallbacks(){
 
     window.electronAPI.addClip((clip) => {
         console.log(clip)
+        document.getElementById('box-clipboard').prepend(getListingXel(clip))
     })
     
 }
@@ -51,4 +52,24 @@ function setupTabbedUICallbacks(){
         document.getElementById('box-plugins').style.display = 'none'
         document.getElementById('box-about').style.display = 'block'  
     })
+}
+
+
+
+function getListingXel(clip){
+    let newListingHTML = `
+    <x-accordion id="">
+        <header>
+            <x-icon href="#${clip.iconTag}"></x-icon>
+            <x-label>${clip.text}</x-label>
+        </header>
+        <main>
+            ${clip.html}
+        </main>
+    </x-accordion>`
+    
+    let newListing = document.createElement('div')
+    newListing.innerHTML = newListingHTML
+    return newListing
+
 }
