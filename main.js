@@ -10,6 +10,7 @@ const Clip = require("./modules/clip.js")
 let oldClip = false
 let window
 let pollingInterval = 1000
+let logfilePath = path.join(__dirname, "out.log")
 
 // modify your existing createWindow() function
 const createWindow = () => {
@@ -55,14 +56,11 @@ function polling(){
         //console.log(newClip)
 
         console.log(Date.now())
-        let newClipEvent = {
-            id: Date.now(),
-            clip: newClip,
-            typeInfo: {
-                type: "text etc."
-            }
-        }
-        window.webContents.send('add-clip', newClipEvent)
+
+        newClip.process()
+        
+        log(newClip.availableFormats)
+        window.webContents.send('add-clip', newClip)
 
         oldClip = newClip
     }
@@ -72,3 +70,13 @@ function polling(){
 }
 
 
+
+function log(data){
+  if(typeof(data)=='object'){
+    console.log(data)
+    fs.writeFileSync(logfilePath, JSON.stringify(data))
+  } else {
+    console.log(Date.now(), data)
+    fs.writeFileSync(logfilePath, data)
+  }
+}
