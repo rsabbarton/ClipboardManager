@@ -4,14 +4,17 @@ module.exports = class Clip {
     constructor(clipboardObject) {
         // identification
         this.id = Date.now()
-
+        //console.log(clipboardObject)
         // Clipboard Contents
         this.text = clipboardObject.readText()
         this.html = clipboardObject.readHTML()
         this.image = clipboardObject.readImage()
         this.rtf = clipboardObject.readRTF()
         this.bookmark = clipboardObject.readBookmark()
+        this.imageDataUrl = this.image.toDataURL()
+        this.imageDataCheck = this.imageDataUrl.substring(0,100)
 
+        //console.log(this.imageDataUrl)
         // read the buffer
         if(clipboardObject.availableFormats().length > 0){
             this.buffer = clipboardObject.readBuffer(clipboardObject.availableFormats()[0])
@@ -31,7 +34,7 @@ module.exports = class Clip {
            typeof(clip.image) == 'object' &&
            typeof(this.image.toDataURL) == 'function' &&
            typeof(clip.image.toDataURL) == 'function'){
-            if(clip.image.toDataURL() != this.image.toDataURL()) return false
+            if(clip.imageDataCheck != this.imageDataCheck) return false
         }
             
             
@@ -57,7 +60,7 @@ module.exports = class Clip {
         this.iconTag = 'text-align-left'
 
         
-        console.log(this.availableFormats)
+        //console.log(this.availableFormats)
         if(typeof(this.availableFormats) == 'object'){
             this.availableFormats.forEach((format)=>{
                 let f = format.toLowerCase()

@@ -1,24 +1,63 @@
 
+html, body {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: hidden;
+}
 
+body.clipboard-manager {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: hidden;
+}
 
 #box-search {
     padding: 10px;
+    padding-bottom: 0px;
 }
 
 #box-clipboard  {
     padding: 10px;
+    padding-top: 0px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    scrollbar-width: auto;
+    overscroll-behavior-y: auto;
+    height: -webkit-fill-available;
 }
 
 #box-settings {
     padding: 10px;
+    padding-top: 0px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    scrollbar-width: auto;
+    overscroll-behavior-y: auto;
+    height: -webkit-fill-available;
 }
 
 #box-plugins {
     padding: 10px;
+    padding-top: 0px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    scrollbar-width: auto;
+    overscroll-behavior-y: auto;
+    height: -webkit-fill-available;
 }
 
 #box-about {
     padding: 10px;
+    padding-top: 0px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    scrollbar-width: auto;
+    overscroll-behavior-y: auto;
+    height: -webkit-fill-available;
 }
 
 .x-accordion-label {
@@ -26,4 +65,14 @@
     overflow-y: hidden;
     text-wrap: nowrap;
     width: -webkit-fill-available;
+}
+
+.clipboard-image-preview {
+    width: 30px;
+    height: 20px;
+}
+
+.clipboard-image-display {
+    max-width: -webkit-fill-avaiable;
+    max-height: 720px;
 }

@@ -23,8 +23,8 @@ let logfilePath = path.join(__dirname, "out.log")
 // modify your existing createWindow() function
 const createWindow = () => {
   window = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: 700,
+    height: 500,
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
@@ -67,9 +67,20 @@ ipcMain.on("history:clear",(event)=>{
   clearHistory()
 })
 
-ipcMain.on("history:copy",(id)=>{
+ipcMain.on("history:copy",(event, id)=>{
   copyEntry(id)
 })
+
+ipcMain.on("history:delete",(event, id)=>{
+  deleteEntry(id)
+})
+
+ipcMain.on("url:open",(event, url)=>{
+  openUrlInBrowser(url)
+})
+
+
+
 function polling(){
 
     let newClip = new Clip(clipboard)
@@ -122,7 +133,7 @@ function loadHistory(){
       history = JSON.parse(fs.readFileSync(historyFile))
       if(typeof(history) == 'object'){
         history.forEach((entry)=>{
-          console.log(entry)
+          //console.log(entry)
           window.webContents.send('add-clip', entry)
 
         })
@@ -142,6 +153,32 @@ function clearHistory(){
 
 
 function copyEntry(id){
-  // TODO: Add copy entry code
-  
+    console.log("Copying: ", id)
+    history.forEach(entry=>{
+      if(entry.id == id){
+        clipboard.write({
+          text: entry.text,
+          html: entry.html,
+          rtf: entry.rtf,
+          bookmark: entry.bookmark
+        })
+      }
+    })
+}
+
+
+function deleteEntry(id){
+  console.log("Deleting: ", id)
+  history.forEach((entry, index)=>{
+    if(entry.id == id){
+      history.splice(index,1)
+      saveHistory()
+    }
+  }) 
+}
+
+
+
+function openUrlInBrowser(url){
+  shell.openExternal(url)
 }

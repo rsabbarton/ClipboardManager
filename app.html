@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="./css/app.css">
     
   </head>
-  <body>
+  <body class="clipboard-manager">
     <x-tabs style="width:100%;">
       <x-tab selected id="tab-clipboard">
         <x-icon href="#paste"></x-icon>
@@ -49,6 +49,7 @@
       <x-button id="button-clear-history">
         <x-icon href="#clock"></x-icon>
         <x-label>Clear Clipboard History</x-label>
+        <x-notification timeout="2000">Clearing Cliboard History</x-notification>
       </x-button>
     </x-box>
     <x-box id="box-plugins" vertical style="display: none;">

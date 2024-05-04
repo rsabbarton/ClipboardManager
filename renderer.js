@@ -22,7 +22,7 @@ function main() {
 function setupElectronCallbacks(){
 
     window.electronAPI.addClip((clip) => {
-        console.log(clip)
+        //console.log(clip)
         document.getElementById('box-clipboard').prepend(getListingXel(clip))
     })
     
@@ -68,6 +68,25 @@ function setupButtonCallbacks(){
         window.electronAPI.clearHistory()
         document.getElementById('box-clipboard').innerHTML = ""
     })
+
+
+    document.getElementById('input-search').addEventListener('input',(event)=>{
+        let term = event.srcElement.value.toLowerCase()
+        console.log(term)
+        let elements = document.getElementById('box-clipboard').querySelectorAll('x-accordion')
+        elements.forEach((e)=>{
+            if(term.length == 0){
+                e.style.display = 'block'
+            } else {
+                let content = e.querySelector('main').innerHTML.toLowerCase()
+                if(content.indexOf(term)>-1){
+                    e.style.display = 'block'
+                } else {
+                    e.style.display = 'none'
+                }
+            }
+        })
+    })
 }
 
 function getListingXel(clip){
@@ -89,15 +108,22 @@ function getListingXel(clip){
             <x-button id='button-copy' metaid="${id}" style="margin-right: 3px;">
                 <x-icon href="#copy"></x-icon>
             </x-button>
-            <x-button style="margin-right: 3px;">
-                <x-icon href="#bookmark"></x-icon>
+            <x-button id='button-delete' metaid="${id}" style="margin-right: 3px;">
+                <x-icon href="#delete"></x-icon>
             </x-button>
             <x-button>
                 <x-icon href="#menu"></x-icon>
+                <x-menu>
+                    <x-menuitem id='menu-search' metaid="${id}" onclick="menuClicked('search','${id}');">
+                        <x-icon href="#search"></x-icon>
+                        <x-label>Search with Google</x-label>
+                    </x-menuitem>
+                </x-menu>
             </x-button>
         </header>
         <main>
             ${html}
+            <img id='image-display' style='display: none;'>
         </main>
     </x-accordion>`
     
@@ -105,9 +131,64 @@ function getListingXel(clip){
     newListing.innerHTML = newListingHTML
     newListing.querySelector('#button-copy').addEventListener('click',(event, id)=>{
         console.log('copying clip id: ', event.srcElement.attributes.metaid.value)
-        copyEntry(event.srcElement.attributes.metaid.value)
+        window.electronAPI.copyEntry(event.srcElement.attributes.metaid.value)
         //console.log(event)
     })
+    newListing.querySelector('#button-delete').addEventListener('click',(event, id)=>{
+        console.log('deleting clip id: ', event.srcElement.attributes.metaid.value)
+        window.electronAPI.deleteEntry(event.srcElement.attributes.metaid.value)
+        let acc = document.getElementById('box-clipboard').querySelectorAll('x-accordion')
+        acc.forEach(a=>{
+            if(a.id == event.srcElement.attributes.metaid.value)
+                a.parentElement.removeChild(a)
+        })
+    })
+    //console.log(clip.imageDataUrl)
+    if(typeof(clip.imageDataUrl) != 'undefined' && clip.imageDataUrl.length > 0 && clip.hasImage){
+        let img = document.createElement('img')
+        img.src = clip.imageDataUrl
+        img.classList.add('clipboard-image-display')
+        let imgPreview = document.createElement('img')
+        imgPreview.src = clip.imageDataUrl
+        imgPreview.style.display = 'block'
+        imgPreview.classList.add('clipboard-image-preview')
+        newListing.querySelector('x-label').appendChild(imgPreview)
+        newListing.querySelector('main').appendChild(img)
+    }
+   
     return newListing
 
+}
+
+
+function getValueText(id){
+    let value = false
+    console.log('getting value for id:', id)
+    let acc = document.getElementById('box-clipboard').querySelectorAll('x-accordion')
+    acc.forEach(a=>{
+        if(a.id == id){
+            console.log('found:', a.querySelector('x-label').innerHTML)
+            value = a.querySelector('x-label').innerHTML
+        }
+            
+    })
+
+    return value
+}
+
+
+function menuClicked(fn, id){
+
+    let param = getValueText(id)
+    console.log(param)
+    if(!param)
+        return false
+
+
+    console.log('menu clicked:', fn, id)
+    switch(fn){
+        case 'search': 
+            window.electronAPI.openUrl(`https://www.google.com/search?q=${param}`)
+            break
+    }
 }

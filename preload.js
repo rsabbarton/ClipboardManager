@@ -6,7 +6,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
         //console.log(clip)
     }),
     clearHistory: () => ipcRenderer.send('history:clear'),
-    copyEntry: (id) => ipcRenderer.send('history:copy', id)  
+    copyEntry: (id) => ipcRenderer.send('history:copy', id),
+    deleteEntry: (id) => ipcRenderer.send('history:delete', id),
+    openUrl: (url) => ipcRenderer.send('url:open', url)
 })
 
 
