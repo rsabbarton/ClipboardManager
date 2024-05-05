@@ -67,12 +67,23 @@ body.clipboard-manager {
     width: -webkit-fill-available;
 }
 
+#box-html-display {
+    padding: 5px;
+}
+
 .clipboard-image-preview {
     width: 30px;
     height: 20px;
 }
 
 .clipboard-image-display {
-    max-width: -webkit-fill-avaiable;
-    max-height: 720px;
+    max-width: -webkit-fill-available;
+}
+
+#box-image-display {
+    padding: 5px;
+}
+
+#image-info {
+    padding: 5px;
 }
