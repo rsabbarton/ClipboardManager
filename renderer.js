@@ -126,7 +126,7 @@ function getListingXel(clip){
             <x-card vertical id='box-html-display'>
                 ${html}
             </x-card>
-            <x-card vertical id='box-image-display'>
+            <x-card vertical id='box-image-display' style='display: none;'>
                 <x-label id='image-info'></x-label>
             </x-card>
         </main>
@@ -159,6 +159,7 @@ function getListingXel(clip){
         imgPreview.classList.add('clipboard-image-preview')
         newListing.querySelector('.x-accordion-label').appendChild(imgPreview)
         newListing.querySelector('#box-image-display').appendChild(img)
+        newListing.querySelector('#box-image-display').style.display = 'block'
         newListing.querySelector('#box-html-display').style.display = 'none'
         img.onload = ()=>{
             let info = `
