@@ -32,15 +32,14 @@ const createWindow = () => {
   })
 
   window.loadFile('app.html')
-  window.webContents.openDevTools()
+  // window.webContents.openDevTools()
   window.once('ready-to-show', () => {
-    window.show()
     loadHistory()
     if(history.length > 0){
       oldClip = history[history.length - 1]
     }
+    window.show()
     polling()
-
   })
 }
 
