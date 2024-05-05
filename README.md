@@ -1,2 +1,4 @@
 # ClipboardManager
-A multi-platform extendible clipboard manager for Mac
+A clipboard manager for Mac
+
+
