@@ -26,6 +26,7 @@ const createWindow = () => {
     width: 700,
     height: 500,
     show: false,
+    icon: path.join(__dirname,'images','clipboard-manager-icon-png.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }

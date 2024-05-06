@@ -4,7 +4,8 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: "./clipboard-manager-icon.icns"
+    icon: "./images/clipboard-manager-icon-icns.icns",
+    osxSign: {}
   },
   rebuildConfig: {},
   makers: [
