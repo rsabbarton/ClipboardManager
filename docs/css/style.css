@@ -23,3 +23,12 @@
     padding: 10px;
     width: max-content;
 }
+
+
+.btn {
+    margin: 20px;
+    padding: 10px;
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    border-bottom-color: orange;
+}
