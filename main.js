@@ -108,13 +108,14 @@ function polling(){
 
 
 function log(data){
-  if(typeof(data)=='object'){
-    console.log(data)
-    fs.appendFileSync(logfilePath, JSON.stringify(data))
-  } else {
-    console.log(Date.now(), data)
-    fs.writeFileSync(logfilePath, data)
-  }
+  return
+  // if(typeof(data)=='object'){
+  //   console.log(data)
+  //   fs.appendFileSync(logfilePath, JSON.stringify(data))
+  // } else {
+  //   console.log(Date.now(), data)
+  //   fs.writeFileSync(logfilePath, data)
+  //}
 }
 
 
