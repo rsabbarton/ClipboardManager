@@ -18,6 +18,7 @@ let oldClip = false
 let history = new Array()
 let window
 let pollingInterval = 1000
+let isPolling = false
 let logfilePath = path.join(__dirname, "out.log")
 
 // modify your existing createWindow() function
@@ -40,7 +41,7 @@ const createWindow = () => {
       oldClip = history[history.length - 1]
     }
     window.show()
-    polling()
+    if(!isPolling) polling()
   })
 }
 
@@ -92,7 +93,10 @@ function polling(){
 
         newClip.process()
 
-        log(newClip.availableFormats)
+        //console.log(typeof(window.webContents))
+        //log(newClip.availableFormats)
+        //if(window.webContents)
+          
         window.webContents.send('add-clip', newClip)
 
         oldClip = newClip
@@ -103,6 +107,10 @@ function polling(){
 
 
     setTimeout(polling, pollingInterval)
+    isPolling = true
+
+    
+    
 }
 
 
