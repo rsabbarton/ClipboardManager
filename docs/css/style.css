@@ -22,13 +22,14 @@
 .sub-comment {
     padding: 10px;
     width: max-content;
+    text-align: center;
 }
 
 
-a.btn {
+x-button.btn {
     margin: 20px;
-    padding: 10px;
-    border-bottom-style: solid;
-    border-bottom-width: 3px;
-    border-bottom-color: orange;
+    padding: 20px;
+    border-style: solid;
+    border-color: orange;
+    text-align: center;
 }

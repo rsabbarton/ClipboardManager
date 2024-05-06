@@ -35,9 +35,23 @@
     <x-box class="box-content" vertical style="width: 600px;">
       <img src="logo.png" width="300" class="logo-image">
         
-        <a href="https://github.com/rsabbarton/ClipboardManager" class="btn">View on GitHub</a>
-        <a href="./dist/application.zip" class="btn">Download .zip</a>
-        <a href="https://app-store-url" class="btn">App Store</a>
+        <x-box>
+            <x-button onclick="window.location='https://github.com/rsabbarton/ClipboardManager';" class="btn">
+                <x-icon href="#code"></x-icon>
+                <x-label>GitHub</x-label>
+            </x-button>
+            
+            <x-button onclick="window.location='./dist/application.zip';" class="btn">
+                <x-icon href="#code"></x-icon>
+                <x-label>Download</x-label>
+            </x-button>
+            
+            <x-button onclick="window.location='https://app-store-url.here';" class="btn">
+                <x-icon href="#code"></x-icon>
+                <x-label>App Store</x-label>
+            </x-button>
+        </x-box>
+
         <x-card class="sub-comment">
             A simple and easy to use Clipboard Manager.  <br>
             Search, review and re-copy text, code and images.<br>
