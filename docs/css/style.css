@@ -12,5 +12,10 @@
     margin-left: auto;
     margin-right: auto;
     width: 600px;
+    align-items: center;
+}
 
+.logo-image {
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
