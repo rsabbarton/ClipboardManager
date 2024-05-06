@@ -7,27 +7,22 @@
     <title>Clipboard Manager</title>
 
     <script src="node_modules/xel/xel.js" type="module"></script>
-    <meta name="xel-theme" content="node_modules/xel/themes/adwaita-dark.css">
+    <meta name="xel-theme" content="./xel/themes/adwaita-dark.css">
     <meta name="xel-accent-color" content="orange">
-    <meta name="xel-iconsets" content="node_modules/xel/iconsets/material.svg">
+    <meta name="xel-iconsets" content="./xel/iconsets/material.svg">
 
-    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./css/style.css">
     
   </head>
   <body class="clipboard-manager">
     <x-tabs style="width:100%;">
-      <x-tab selected id="tab-clipboard">
+      <x-tab selected id="tab-home">
         <x-icon href="#paste"></x-icon>
-        <x-label>Clipboard</x-label>
+        <x-label>Home</x-label>
       </x-tab>
-      <x-tab id="tab-settings">
+      <x-tab id="tab-docs">
         <x-icon href="#tune"></x-icon>
         <x-label>Settings</x-label>
-      </x-tab>
-      <!-- Plugins functionality targetted for future versions -->
-      <x-tab id="tab-plugins" style="display: none;">
-        <x-icon href="#settings"></x-icon>
-        <x-label>Plugins</x-label>
       </x-tab>
       <x-tab id="tab-about">
         <x-icon href="#info"></x-icon>
