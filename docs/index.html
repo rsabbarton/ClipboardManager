@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' filesystem; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src * filesystem data:;">
+    <title>Clipboard Manager</title>
+
+    <script src="node_modules/xel/xel.js" type="module"></script>
+    <meta name="xel-theme" content="node_modules/xel/themes/adwaita-dark.css">
+    <meta name="xel-accent-color" content="orange">
+    <meta name="xel-iconsets" content="node_modules/xel/iconsets/material.svg">
+
+    <link rel="stylesheet" href="./css/app.css">
+    
+  </head>
+  <body class="clipboard-manager">
+    <x-tabs style="width:100%;">
+      <x-tab selected id="tab-clipboard">
+        <x-icon href="#paste"></x-icon>
+        <x-label>Clipboard</x-label>
+      </x-tab>
+      <x-tab id="tab-settings">
+        <x-icon href="#tune"></x-icon>
+        <x-label>Settings</x-label>
+      </x-tab>
+      <!-- Plugins functionality targetted for future versions -->
+      <x-tab id="tab-plugins" style="display: none;">
+        <x-icon href="#settings"></x-icon>
+        <x-label>Plugins</x-label>
+      </x-tab>
+      <x-tab id="tab-about">
+        <x-icon href="#info"></x-icon>
+        <x-label>About</x-label>
+
+      </x-tab>
+      
+    </x-tabs>
+
+    <x-box id="box-search" style="display: block;">
+      <x-input id="input-search">
+        <x-icon href="#search"></x-icon>
+        <x-label>Search</x-label>
+      </x-input>
+    </x-box>
+    <x-box id="box-clipboard" vertical style="display: block;">
+    </x-box>
+    <x-box id="box-settings" vertical style="display: none;">
+      <h3>Settings</h3>
+      <x-button id="button-clear-history">
+        <x-icon href="#clock"></x-icon>
+        <x-label>Clear Clipboard History</x-label>
+        <x-notification timeout="2000">Clearing Cliboard History</x-notification>
+      </x-button>
+    </x-box>
+    <x-box id="box-plugins" vertical style="display: none;">
+      Plugins and information
+    </x-box>
+    <x-box id="box-about" vertical style="display: none;">
+      <h3>Clipboard Manager - v0.1.0</h3>
+        
+        By: Richard Sabbarton<br>
+        E-Mail: richard.sabbarton@gmail.com<br>
+    </x-box>
+  </body>
+  <script src="./renderer.js"></script>
+</html>
