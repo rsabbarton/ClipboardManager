@@ -8,7 +8,7 @@
 }
 
 
-#box-content {
+.box-content {
     margin-left: auto;
     margin-right: auto;
     width: 600px;
