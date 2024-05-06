@@ -1,10 +1,11 @@
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
+const path = require('path')
 
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: "./images/icon.icns",
+    icon: path.join(process.cwd(), "images", "icon.icns"),
     osxSign: {}
   },
   rebuildConfig: {},
@@ -16,6 +17,7 @@ module.exports = {
     {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
+      icon: path.join(process.cwd(), "images", "icon.icns"),
     },
     {
       name: '@electron-forge/maker-deb',
@@ -29,7 +31,8 @@ module.exports = {
       // Path to the icon to use for the app in the DMG window
       name: '@electron-forge/maker-dmg',
       config: {
-        icon: 'images/icon.icns'
+        icon: path.join(process.cwd(), "images", "icon.icns"),
+    
       }
     },
   ],

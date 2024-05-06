@@ -26,7 +26,7 @@ const createWindow = () => {
     width: 700,
     height: 500,
     show: false,
-    icon: path.join(__dirname,'images','clipboard-manager-icon-png.png'),
+    icon: path.join(__dirname,'images','icon.icns'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -59,7 +59,7 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', () => {
     // TODO: commented out so that it stays running
-    app.quit()
+    //app.quit()
 })
   
   
