@@ -19,6 +19,7 @@ let history = new Array()
 let window
 let pollingInterval = 1000
 let isPolling = false
+let windowOpen = false
 let logfilePath = path.join(__dirname, "out.log")
 
 // modify your existing createWindow() function
@@ -33,6 +34,8 @@ const createWindow = () => {
     }
   })
 
+
+
   window.loadFile('app.html')
   // window.webContents.openDevTools()
   window.once('ready-to-show', () => {
@@ -41,6 +44,7 @@ const createWindow = () => {
       oldClip = history[history.length - 1]
     }
     window.show()
+    windowOpen = true
     if(!isPolling) polling()
   })
 }
@@ -51,7 +55,7 @@ app.whenReady().then(() => {
     
     app.on('activate', () => {
       if (BrowserWindow.getAllWindows().length === 0) createWindow()
-      
+      windowOpen = true;
     })
 
 })
@@ -61,6 +65,7 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
     // TODO: commented out so that it stays running
     //app.quit()
+    windowOpen = false;
 })
   
   
@@ -96,8 +101,10 @@ function polling(){
         //console.log(typeof(window.webContents))
         //log(newClip.availableFormats)
         //if(window.webContents)
-          
-        window.webContents.send('add-clip', newClip)
+        //console.log(window.isVisible())
+
+        if(windowOpen)
+          window.webContents.send('add-clip', newClip)
 
         oldClip = newClip
 
