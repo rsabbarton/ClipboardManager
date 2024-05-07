@@ -104,7 +104,7 @@ function getListingXel(clip){
     <x-accordion id="${id}">
         <header>
             <x-icon href="#${iconTag}"></x-icon>
-            <x-label class="x-accordion-label">${displayText}</x-label>
+            <textarea class="x-accordion-label" rows=1 readonly disabled>${displayText}</textarea>
             <x-button id='button-copy' metaid="${id}" style="margin-right: 3px;">
                 <x-icon href="#copy"></x-icon>
             </x-button>
@@ -157,7 +157,11 @@ function getListingXel(clip){
         imgPreview.src = clip.imageDataUrl
         imgPreview.style.display = 'block'
         imgPreview.classList.add('clipboard-image-preview')
-        newListing.querySelector('.x-accordion-label').appendChild(imgPreview)
+        
+        newListing.querySelector('.x-accordion-label')
+        .parentNode
+        .insertBefore(imgPreview, newListing.querySelector('.x-accordion-label'))
+
         newListing.querySelector('#box-image-display').appendChild(img)
         newListing.querySelector('#box-image-display').style.display = 'block'
         newListing.querySelector('#box-html-display').style.display = 'none'

@@ -65,6 +65,13 @@ body.clipboard-manager {
     overflow-y: hidden;
     text-wrap: nowrap;
     width: -webkit-fill-available;
+    background-color: unset;
+    color: unset;
+    font-family: unset;
+    height: 16px;
+    border-style: none;
+    resize: none;
+    text-overflow: ellipsis;
 }
 
 #box-html-display {
