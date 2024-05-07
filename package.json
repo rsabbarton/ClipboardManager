@@ -1,5 +1,5 @@
 {
-  "name": "clipboardmanager",
+  "name": "Clipboard Manager",
   "version": "0.1.0",
   "description": "clipboard manager",
   "main": "main.js",
@@ -53,15 +53,21 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
+          "config": {
+            "icon": "./images/icon.png"
+          }
         },
         {
           "name": "@electron-forge/maker-rpm",
-          "config": {}
+          "config": {
+            "icon": "./images/icon.png"
+          }
         },
         {
           "name": "@electron-forge/maker-dmg",
-          "config": {}
+          "config": {
+            "name": "Clipboard Manager"
+          }
         }
       ]
     }
