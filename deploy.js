@@ -25,3 +25,17 @@ if(fs.existsSync(path.join(src, 'make', 'zip', 'darwin', 'arm64'))){
     }
 }
 
+// Linux x64  rpm and deb
+if(fs.existsSync(path.join(src, 'make', 'rpm', 'x64'))){
+    let installerNameRPM = `${package.name}-linux-x64-v${package.version}_build-${build.buildNumber}.rpm`
+    if(fs.existsSync(path.join(src, 'make', 'rpm', 'x64', `Clipboard-Manager-${package.version}-1.x86_64.rpm`))){
+        fs.copyFileSync(path.join(src, 'make', 'Clipboard Manager.rpm'), path.join(dest, installerNameRPM))
+    }
+}
+if(fs.existsSync(path.join(src, 'make', 'deb', 'x64'))){
+    let installerNameDEB = `${package.name}-linux-x64-v${package.version}_build-${build.buildNumber}.deb`
+    if(fs.existsSync(path.join(src, 'make', 'deb', 'x64', `clipboard-manager_${package.version}_amd64.deb`))){
+        fs.copyFileSync(path.join(src, 'make', 'Clipboard Manager.deb'), path.join(dest, installerNameDEB))
+    }
+}
+
