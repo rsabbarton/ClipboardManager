@@ -1,13 +1,14 @@
 {
   "name": "Clipboard Manager",
   "version": "0.1.0",
+  "buildNumber": 1001,
   "description": "clipboard manager",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make",
+    "make": "node build.js; electron-forge make",
     "publish": "electron-forge publish",
     "deploy": "node deploy.js"
   },
