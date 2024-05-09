@@ -1,10 +1,10 @@
 const path = require('path')
 const fs = require('fs')
-let package = require('package.json')
-let build = require('build.json')
+let package = require('./package.json')
+let build = require('./build.json')
 
 let src = path.join(__dirname, 'out')
-let dest = path.join(__dirname, 'docs', 'downloads')
+let dest = path.join(__dirname, 'dist')
 
 // deploy to website
 
